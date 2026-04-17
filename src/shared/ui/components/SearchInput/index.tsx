@@ -1,15 +1,15 @@
-import React from "react";
-import { TextInput, TextInputProps, TouchableOpacity } from "react-native";
-import { YStack, XStack } from "tamagui";
-import { colors } from "../../tokens/colors";
-import { borderRadius, spacing } from "../../tokens/spacing";
-import { fontSize } from "../../tokens/typography";
+import React from 'react';
+import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
+import { YStack, XStack } from 'tamagui';
+import { colors } from '../../tokens/colors';
+import { borderRadius, spacing } from '../../tokens/spacing';
+import { fontSize } from '../../tokens/typography';
 
 export interface SearchInputProps {
   value: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
-  onSubmitEditing?: TextInputProps["onSubmitEditing"];
+  onSubmitEditing?: TextInputProps['onSubmitEditing'];
 }
 
 export function SearchInput({
@@ -30,11 +30,7 @@ export function SearchInput({
     >
       {/* Search icon */}
       <YStack marginRight={spacing[2]}>
-        <TextInput
-          editable={false}
-          value="🔍"
-          style={{ fontSize: 14, padding: 0 }}
-        />
+        <TextInput editable={false} value="🔍" style={{ fontSize: 14, padding: 0 }} />
       </YStack>
 
       <TextInput
@@ -54,7 +50,7 @@ export function SearchInput({
 
       {value.length > 0 && (
         <TouchableOpacity
-          onPress={() => onChangeText("")}
+          onPress={() => onChangeText('')}
           hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         >
           <TextInput
