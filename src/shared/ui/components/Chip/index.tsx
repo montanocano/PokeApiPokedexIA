@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 import { YStack, Text } from "tamagui";
 import { colors } from "../../tokens/colors";
 import { borderRadius, spacing } from "../../tokens/spacing";
-import { fontSize, fontWeight } from "../../tokens/typography";
+import { fontSize } from "../../tokens/typography";
 
 export interface ChipProps {
   label: string;

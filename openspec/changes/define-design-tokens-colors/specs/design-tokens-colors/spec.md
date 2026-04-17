@@ -6,7 +6,7 @@ El sistema SHALL exportar un objeto `primary` con los colores base de la Pokéde
 
 #### Scenario: Importar colores primarios
 
-- **WHEN** un componente importa `colors.primary` desde `src/tokens/colors`
+- **WHEN** un componente importa `colors.primary` desde `src/shared/ui/tokens/colors`
 - **THEN** tiene acceso a las propiedades `brand`, `background`, `surface` y `text` con sus valores hex
 
 ### Requirement: Colores por tipo de Pokémon
@@ -53,9 +53,9 @@ El sistema SHALL exportar un objeto `semantic` con colores para los estados `suc
 
 ### Requirement: Archivo tokens/colors.ts como fuente única de verdad
 
-El sistema SHALL contener todos los tokens de color en `src/tokens/colors.ts`. Ningún componente SHALL hardcodear valores de color hexadecimales directamente.
+El sistema SHALL contener todos los tokens de color en `src/shared/ui/tokens/colors.ts`. Ningún componente SHALL hardcodear valores de color hexadecimales directamente.
 
 #### Scenario: Consumo correcto de tokens
 
 - **WHEN** se revisa el código de cualquier componente que use colores
-- **THEN** los valores de color provienen de una importación de `src/tokens/colors`, no de strings hex inline
+- **THEN** los valores de color provienen de una importación de `src/shared/ui/tokens/colors`, no de strings hex inline
