@@ -2,7 +2,7 @@ import React from "react";
 import { TextInput, TextInputProps, TouchableOpacity } from "react-native";
 import { YStack, XStack } from "tamagui";
 import { colors } from "../../tokens/colors";
-import { borderRadius, spacing } from "../../tokens/spacing";
+import { borderRadius, sizes, spacing } from "../../tokens/spacing";
 import { fontSize } from "../../tokens/typography";
 
 export interface SearchInputProps {
@@ -26,14 +26,14 @@ export function SearchInput({
       borderWidth={1}
       borderColor={colors.theme.light.border}
       paddingHorizontal={spacing[3]}
-      height={40}
+      height={sizes.button.md}
     >
       {/* Search icon */}
       <YStack marginRight={spacing[2]}>
         <TextInput
           editable={false}
           value="🔍"
-          style={{ fontSize: 14, padding: 0 }}
+          style={{ fontSize: fontSize.sm, padding: 0 }}
         />
       </YStack>
 
@@ -55,13 +55,18 @@ export function SearchInput({
       {value.length > 0 && (
         <TouchableOpacity
           onPress={() => onChangeText("")}
-          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          hitSlop={{
+            top: spacing[2],
+            bottom: spacing[2],
+            left: spacing[2],
+            right: spacing[2],
+          }}
         >
           <TextInput
             editable={false}
             value="✕"
             style={{
-              fontSize: 14,
+              fontSize: fontSize.sm,
               color: colors.theme.light.textSecondary,
               padding: 0,
             }}

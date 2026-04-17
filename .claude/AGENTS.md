@@ -6,10 +6,10 @@ A React Native Pokédex app (Expo SDK 54, TypeScript strict, Tamagui v2, Expo Ro
 
 ## Reference
 
-| Topic                                                   | Description                                                                   |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [Tech Stack](docs/agents/tech-stack.md)                 | Framework, UI runtime, language, design system, and navigation with versions  |
-| [Folder Structure](docs/agents/folder-structure.md)     | Directory tree and rules for where to place screens, components, and features |
-| [Coding Conventions](docs/agents/coding-conventions.md) | TypeScript strict, no inline styles, Tamagui token usage, co-location rules   |
-| [Dev Commands](docs/agents/dev-commands.md)             | All `npm run` scripts for starting the app and running checks                 |
-| [CI Gate](docs/agents/ci-gate.md)                       | Four CI jobs and the local commands to verify them before marking work done   |
+| Topic                                               | Description                                                                   |
+| --------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [Tech Stack](.claude/tech-stack.md)                 | Framework, UI runtime, language, design system, and navigation with versions  |
+| [Folder Structure](.claude/folder-structure.md)     | Directory tree and rules for where to place screens, components, and features |
+| [Coding Conventions](.claude/coding-conventions.md) | TypeScript strict, no inline styles, Tamagui token usage, co-location rules   |
+| [Dev Commands](.claude/dev-commands.md)             | All `npm run` scripts for starting the app and running checks                 |
+| [CI Gate](.claude/ci-gate.md)                       | CI jobs and the local commands to verify them before marking work done        |

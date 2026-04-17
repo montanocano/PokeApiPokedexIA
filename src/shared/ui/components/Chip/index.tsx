@@ -38,9 +38,7 @@ export function Chip({ label, color, selected = false, onPress }: ChipProps) {
       <Text
         color={textColor}
         fontSize={fontSize.xs}
-        fontWeight={
-          String(selected ? fontWeight.semibold : fontWeight.medium) as any
-        }
+        fontWeight={selected ? "600" : "500"}
       >
         {label}
       </Text>

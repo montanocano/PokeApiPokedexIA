@@ -8,7 +8,7 @@
 ├── src/
 │   ├── features/         # Feature slices
 │   │   ├── pokemon-list/         # hooks/, repositories/, search-filter/, store/, Unit-test/
-│   │   ├── pokemon-details/      # hooks/, repositories/, utils/, store/, Unit-test/
+│   │   ├── pokemon-detail/       # hooks/, repositories/, utils/, store/, Unit-test/
 │   │   └── pokemon-favorite/     # hooks/, store/, Unit-test/
 │   ├── shared/
 │   │   ├── api/          # PokéAPI client and data-fetching utilities
