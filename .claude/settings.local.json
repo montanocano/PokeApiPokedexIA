@@ -14,7 +14,13 @@
       "Bash(npx prettier:*)",
       "Bash(wait)",
       "Bash(npm test:*)",
-      "Bash(./node_modules/.bin/eslint:*)"
+      "Bash(./node_modules/.bin/eslint:*)",
+      "Bash(git -C /mnt/c/Users/Usuario/Desktop/Practicas/PokeApiPokedexIA status --short)",
+      "Bash(git -C /mnt/c/Users/Usuario/Desktop/Practicas/PokeApiPokedexIA branch --show-current)",
+      "Bash(git -C /mnt/c/Users/Usuario/Desktop/Practicas/PokeApiPokedexIA status -uall)",
+      "Bash(git -C /mnt/c/Users/Usuario/Desktop/Practicas/PokeApiPokedexIA log --oneline -5)",
+      "Bash(git -C /mnt/c/Users/Usuario/Desktop/Practicas/PokeApiPokedexIA show --stat HEAD)",
+      "Bash(git:*)"
     ]
   }
 }
