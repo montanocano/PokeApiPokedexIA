@@ -7,7 +7,14 @@
       "Bash(npx tsc:*)",
       "Bash(xargs cat:*)",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d.get\\('devDependencies', {}\\)\\)\")",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(mkdir -p /mnt/c/Users/Usuario/Desktop/Practicas/PokeApiPokedexIA/.claude)",
+      "Bash(mv /mnt/c/Users/Usuario/Desktop/Practicas/PokeApiPokedexIA/CLAUDE.md /mnt/c/Users/Usuario/Desktop/Practicas/PokeApiPokedexIA/.claude/CLAUDE.md)",
+      "Bash(npm run:*)",
+      "Bash(npx prettier:*)",
+      "Bash(wait)",
+      "Bash(npm test:*)",
+      "Bash(./node_modules/.bin/eslint:*)"
     ]
   }
 }

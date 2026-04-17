@@ -7,12 +7,14 @@ La decisión de empezar por los colores es intencionada: es la capa más transve
 ## Goals / Non-Goals
 
 **Goals:**
+
 - Crear `src/tokens/colors.ts` como fuente única de verdad para todos los colores
 - Cubrir los 18 tipos de Pokémon con colores representativos
 - Soportar tema claro y tema oscuro desde el primer día
 - Definir colores semánticos (success, error, warning) reutilizables en toda la UI
 
 **Non-Goals:**
+
 - No definir tokens de tipografía ni espaciado (serán otras tarjetas)
 - No integrar con ningún sistema de theming de React todavía (Context, CSS vars) — solo el archivo de valores
 - No cubrir colores de generaciones o regiones de Pokémon

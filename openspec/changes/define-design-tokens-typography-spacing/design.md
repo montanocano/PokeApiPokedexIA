@@ -7,12 +7,14 @@ Esta tarjeta cubre las cinco áreas definidas en el backlog: escala tipográfica
 ## Goals / Non-Goals
 
 **Goals:**
+
 - Crear `src/shared/ui/tokens/typography.ts` con la escala de `fontSize` y valores de `fontWeight`
 - Crear `src/shared/ui/tokens/spacing.ts` con `spacing`, `sizes` y `borderRadius`
 - Que los tokens sean la única fuente de verdad: ningún componente hardcodea estos valores
 - Mantener coherencia con la estructura de `colors.ts` (objetos exportados, TypeScript puro)
 
 **Non-Goals:**
+
 - No definir familias tipográficas (font-family) — eso es una tarjeta aparte
 - No crear un sistema de theming con Context o CSS variables todavía
 - No definir tokens de sombras (shadows) ni z-index en esta iteración

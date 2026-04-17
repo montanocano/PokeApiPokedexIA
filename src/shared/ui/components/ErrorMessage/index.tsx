@@ -1,9 +1,9 @@
-import React from 'react';
-import { YStack, XStack, Text } from '@tamagui/core';
-import { colors } from '../../tokens/colors';
-import { spacing } from '../../tokens/spacing';
-import { fontSize } from '../../tokens/typography';
-import { Button } from '../Button';
+import React from "react";
+import { YStack, XStack, Text } from "tamagui";
+import { colors } from "../../tokens/colors";
+import { spacing } from "../../tokens/spacing";
+import { fontSize } from "../../tokens/typography";
+import { Button } from "../Button";
 
 export interface ErrorMessageProps {
   message?: string | null;
