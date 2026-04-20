@@ -5,11 +5,13 @@ The project is a React Native / Expo Pokedex app. Currently there is no `src/` d
 ## Goals / Non-Goals
 
 **Goals:**
+
 - Create `src/features/pokemon-list`, `src/features/pokemon-detail`, `src/features/pokemon-favorite`
 - Create `src/shared/api`, `src/shared/ui`, `src/shared/utils`
 - All folders remain empty (placeholder `.gitkeep` files may be added so git tracks them)
 
 **Non-Goals:**
+
 - Moving or refactoring any existing code
 - Adding index files, barrel exports, or configuration
 - Defining internal structure within each sub-folder
@@ -23,6 +25,7 @@ Git does not track empty directories. Adding a zero-byte `.gitkeep` in each leaf
 `features/` is the widely-used convention in React/React Native feature-slice architecture. Clear semantic meaning (a self-contained product feature), consistent with industry patterns.
 
 **`shared/` sub-folder split: `api`, `ui`, `utils`**
+
 - `api`: PokeAPI client and data-fetching helpers
 - `ui`: Reusable presentational components
 - `utils`: Pure helper functions (formatting, type guards, etc.)

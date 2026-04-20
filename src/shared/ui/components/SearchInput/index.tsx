@@ -1,15 +1,15 @@
-import React from 'react';
-import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
-import { Stack, XStack } from '@tamagui/core';
-import { colors } from '../../tokens/colors';
-import { borderRadius, spacing } from '../../tokens/spacing';
-import { fontSize } from '../../tokens/typography';
+import React from "react";
+import { TextInputProps, TouchableOpacity } from "react-native";
+import { Input, Text, XStack } from "tamagui";
+import { colors } from "../../tokens/colors";
+import { borderRadius, sizes, spacing } from "../../tokens/spacing";
+import { fontSize } from "../../tokens/typography";
 
 export interface SearchInputProps {
   value: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
-  onSubmitEditing?: TextInputProps['onSubmitEditing'];
+  onSubmitEditing?: TextInputProps["onSubmitEditing"];
 }
 
 export function SearchInput({
@@ -26,39 +26,44 @@ export function SearchInput({
       borderWidth={1}
       borderColor={colors.theme.light.border}
       paddingHorizontal={spacing[3]}
-      height={40}
+      height={sizes.button.md}
     >
       {/* Search icon */}
-      <Stack marginRight={spacing[2]}>
-        <TextInput
-          editable={false}
-          value="🔍"
-          style={{ fontSize: 14, padding: 0 }}
-        />
-      </Stack>
+      <Text
+        fontSize={fontSize.sm}
+        marginRight={spacing[2]}
+        color={colors.theme.light.text}
+      >
+        🔍
+      </Text>
 
-      <TextInput
+      <Input
+        unstyled
+        flex={1}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor={colors.theme.light.textSecondary}
         onSubmitEditing={onSubmitEditing}
         returnKeyType="search"
-        style={{
-          flex: 1,
-          fontSize: fontSize.md,
-          color: colors.theme.light.text,
-          padding: 0,
-        }}
+        fontSize={fontSize.md}
+        color={colors.theme.light.text}
+        padding={0}
       />
 
       {value.length > 0 && (
-        <TouchableOpacity onPress={() => onChangeText('')} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
-          <TextInput
-            editable={false}
-            value="✕"
-            style={{ fontSize: 14, color: colors.theme.light.textSecondary, padding: 0 }}
-          />
+        <TouchableOpacity
+          onPress={() => onChangeText("")}
+          hitSlop={{
+            top: spacing[2],
+            bottom: spacing[2],
+            left: spacing[2],
+            right: spacing[2],
+          }}
+        >
+          <Text fontSize={fontSize.sm} color={colors.theme.light.textSecondary}>
+            ✕
+          </Text>
         </TouchableOpacity>
       )}
     </XStack>

@@ -1,9 +1,9 @@
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Stack, Text } from '@tamagui/core';
-import { colors } from '../../tokens/colors';
-import { borderRadius, spacing } from '../../tokens/spacing';
-import { fontSize, fontWeight } from '../../tokens/typography';
+import React from "react";
+import { TouchableOpacity } from "react-native";
+import { YStack, Text } from "tamagui";
+import { colors } from "../../tokens/colors";
+import { borderRadius, spacing } from "../../tokens/spacing";
+import { fontSize } from "../../tokens/typography";
 
 export interface ChipProps {
   label: string;
@@ -17,7 +17,7 @@ function getContrastColor(hex: string): string {
   const g = parseInt(hex.slice(3, 5), 16);
   const b = parseInt(hex.slice(5, 7), 16);
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.5 ? '#1A1A1A' : '#FFFFFF';
+  return luminance > 0.5 ? "#1A1A1A" : "#FFFFFF";
 }
 
 export function Chip({ label, color, selected = false, onPress }: ChipProps) {
@@ -25,7 +25,7 @@ export function Chip({ label, color, selected = false, onPress }: ChipProps) {
   const textColor = color ? getContrastColor(bgColor) : colors.primary.text;
 
   const chipContent = (
-    <Stack
+    <YStack
       alignItems="center"
       justifyContent="center"
       paddingHorizontal={spacing[3]}
@@ -33,16 +33,16 @@ export function Chip({ label, color, selected = false, onPress }: ChipProps) {
       borderRadius={borderRadius.full}
       backgroundColor={bgColor}
       borderWidth={selected ? 2 : 0}
-      borderColor={selected ? colors.primary.brand : 'transparent'}
+      borderColor={selected ? colors.primary.brand : "transparent"}
     >
       <Text
         color={textColor}
         fontSize={fontSize.xs}
-        fontWeight={String(selected ? fontWeight.semibold : fontWeight.medium) as any}
+        fontWeight={selected ? "600" : "500"}
       >
         {label}
       </Text>
-    </Stack>
+    </YStack>
   );
 
   if (onPress) {

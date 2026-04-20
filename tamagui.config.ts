@@ -1,9 +1,9 @@
-import { config as defaultConfig } from '@tamagui/config/v3';
-import { createTamagui, createTokens } from '@tamagui/core';
+import { config as defaultConfig } from "@tamagui/config/v3";
+import { createTamagui, createTokens } from "@tamagui/core";
 
-import { colors } from './src/shared/ui/tokens/colors';
-import { borderRadius, spacing } from './src/shared/ui/tokens/spacing';
-import { fontSize, fontWeight } from './src/shared/ui/tokens/typography';
+import { colors } from "./src/shared/ui/tokens/colors";
+import { borderRadius, spacing } from "./src/shared/ui/tokens/spacing";
+import { fontSize, fontWeight } from "./src/shared/ui/tokens/typography";
 
 const tokens = createTokens({
   ...defaultConfig.tokens,
@@ -98,9 +98,9 @@ export const config = createTamagui({
         3: fontSize.md,
         4: fontSize.lg,
         5: fontSize.xl,
-        6: fontSize['2xl'],
-        7: fontSize['3xl'],
-        8: fontSize['4xl'],
+        6: fontSize["2xl"],
+        7: fontSize["3xl"],
+        8: fontSize["4xl"],
       },
       weight: {
         1: String(fontWeight.regular),
@@ -114,9 +114,9 @@ export const config = createTamagui({
       size: {
         1: fontSize.lg,
         2: fontSize.xl,
-        3: fontSize['2xl'],
-        4: fontSize['3xl'],
-        5: fontSize['4xl'],
+        3: fontSize["2xl"],
+        4: fontSize["3xl"],
+        5: fontSize["4xl"],
       },
       weight: {
         1: String(fontWeight.semibold),
@@ -128,6 +128,6 @@ export const config = createTamagui({
 
 export type AppConfig = typeof config;
 
-declare module 'tamagui' {
+declare module "tamagui" {
   interface TamaguiCustomConfig extends AppConfig {}
 }
