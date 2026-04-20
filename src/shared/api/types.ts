@@ -50,11 +50,26 @@ export interface PokemonListResponse {
 export function isPokemonListResponse(
   value: unknown,
 ): value is PokemonListResponse {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+
   return (
-    typeof value === "object" &&
-    value !== null &&
-    "results" in value &&
-    Array.isArray((value as PokemonListResponse).results)
+    typeof candidate.count === "number" &&
+    (typeof candidate.next === "string" || candidate.next === null) &&
+    (typeof candidate.previous === "string" || candidate.previous === null) &&
+    Array.isArray(candidate.results) &&
+    candidate.results.every(
+      (item) =>
+        typeof item === "object" &&
+        item !== null &&
+        "name" in item &&
+        typeof (item as Record<string, unknown>).name === "string" &&
+        "url" in item &&
+        typeof (item as Record<string, unknown>).url === "string",
+    )
   );
 }
 

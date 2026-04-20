@@ -2,6 +2,7 @@
 import MockAdapter from "axios-mock-adapter";
 import client from "../client";
 import type { ApiError } from "../types";
+import { API_BASE_URL, API_TIMEOUT_MS } from "../../config";
 
 const mock = new MockAdapter(client);
 
@@ -11,11 +12,11 @@ afterEach(() => {
 
 describe("API client configuration", () => {
   it("has the correct baseURL", () => {
-    expect(client.defaults.baseURL).toBe("https://pokeapi.co/api/v2/");
+    expect(client.defaults.baseURL).toBe(API_BASE_URL);
   });
 
   it("has a 10 000 ms timeout", () => {
-    expect(client.defaults.timeout).toBe(10000);
+    expect(client.defaults.timeout).toBe(API_TIMEOUT_MS);
   });
 });
 
