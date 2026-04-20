@@ -6,11 +6,11 @@ No test framework is configured yet. The recommended setup for this stack is bel
 
 ## Recommended Stack
 
-| Tool                              | Purpose                              |
-| --------------------------------- | ------------------------------------ |
-| `jest-expo`                       | Jest preset for Expo projects        |
-| `@testing-library/react-native`   | Component rendering and interaction  |
-| `@testing-library/jest-native`    | Custom matchers (`toBeVisible`, etc) |
+| Tool                            | Purpose                              |
+| ------------------------------- | ------------------------------------ |
+| `jest-expo`                     | Jest preset for Expo projects        |
+| `@testing-library/react-native` | Component rendering and interaction  |
+| `@testing-library/jest-native`  | Custom matchers (`toBeVisible`, etc) |
 
 ## Installation
 
