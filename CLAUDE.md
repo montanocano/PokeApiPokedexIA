@@ -1,4 +1,4 @@
-# AGENTS.md
+# CLAUDE.md
 
 Guidance for AI coding agents working on this repository.
 
@@ -13,3 +13,4 @@ A React Native Pokédex app (Expo SDK 54, TypeScript strict, Tamagui v2, Expo Ro
 | [Coding Conventions](.claude/coding-conventions.md) | TypeScript strict, no inline styles, Tamagui token usage, co-location rules   |
 | [Dev Commands](.claude/dev-commands.md)             | All `npm run` scripts for starting the app and running checks                 |
 | [CI Gate](.claude/ci-gate.md)                       | CI jobs and the local commands to verify them before marking work done        |
+| [Testing](.claude/testing.md)                       | Recommended test stack, file placement rules, and how to run tests            |
