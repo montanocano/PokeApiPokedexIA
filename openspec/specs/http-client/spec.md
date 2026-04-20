@@ -1,6 +1,9 @@
 ## ADDED Requirements
 
+<!-- AGREE: All four requirements are well-formed with clear WHEN/THEN scenarios. -->
+
 ### Requirement: Axios instance with PokéAPI base URL
+<!-- AGREE: Trailing slash on the baseURL is critical — without it axios joins paths incorrectly-->
 The system SHALL export a pre-configured axios instance with `baseURL` set to `https://pokeapi.co/api/v2/`.
 
 #### Scenario: Request uses base URL automatically
@@ -8,6 +11,7 @@ The system SHALL export a pre-configured axios instance with `baseURL` set to `h
 - **THEN** the request SHALL be sent to `https://pokeapi.co/api/v2/pokemon`
 
 ### Requirement: Default request timeout
+<!-- AGREE: 10 000 ms is appropriate for a public API on mobile. -->
 The system SHALL configure the axios instance with a default timeout of 10 000 ms.
 
 #### Scenario: Request exceeds timeout
@@ -15,6 +19,7 @@ The system SHALL configure the axios instance with a default timeout of 10 000 m
 - **THEN** axios SHALL abort the request and reject the promise with a timeout error
 
 ### Requirement: Response error interceptor
+<!-- AGREE: Two-branch design (response present vs. absent) is the correct split. `status: 0` is an unambiguous sentinel for network failures. -->
 The system SHALL attach a response interceptor that normalizes failed responses into a consistent `ApiError` shape before rejecting.
 
 #### Scenario: Server returns 4xx or 5xx
