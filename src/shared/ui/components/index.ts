@@ -15,3 +15,6 @@ export type { LoadingSpinnerProps } from "./LoadingSpinner";
 
 export { ErrorMessage } from "./ErrorMessage";
 export type { ErrorMessageProps } from "./ErrorMessage";
+
+export { PokemonCard } from "./PokemonCard";
+export type { PokemonCardProps } from "./PokemonCard";
