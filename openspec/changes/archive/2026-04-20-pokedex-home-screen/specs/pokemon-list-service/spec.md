@@ -19,7 +19,8 @@ The system SHALL provide `fetchPokemonList(offset: number, limit: number)` in `p
 - **THEN** `fetchPokemonList` SHALL propagate the error to the caller without swallowing it
 
 ### Requirement: Fetch Pokemon detail by URL
-The system SHALL provide `fetchPokemonDetail(url: string)` in `pokemonListRepositoryImpl.ts` that calls the HTTP client with the full PokéAPI resource URL and returns a typed `PokemonDetailResponse` containing `id`, `name`, `sprites`, `types`, and `stats`.
+<!-- FIXED: The original implementation passed the full absolute URL directly to `client.get()`, which bypassed the axios `baseURL` abstraction. Fixed by stripping `API_BASE_URL` from the full URL before calling the client, so the client always receives a relative path consistent with its configuration. -->
+The system SHALL provide `fetchPokemonDetail(url: string)` in `pokemonListRepositoryImpl.ts` that strips the `API_BASE_URL` prefix from the incoming URL and calls the HTTP client with the resulting relative path, returning a typed `PokemonDetailResponse` containing `id`, `name`, `sprites`, `types`, and `stats`.
 
 #### Scenario: Successful detail fetch
 - **WHEN** `fetchPokemonDetail('https://pokeapi.co/api/v2/pokemon/1/')` is called

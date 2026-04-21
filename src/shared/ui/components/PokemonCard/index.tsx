@@ -1,50 +1,16 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import { Image } from "expo-image";
 import { XStack, YStack, Text } from "tamagui";
 import { Card } from "../Card";
 import { Chip } from "../Chip";
+import { colors } from "../../tokens/colors";
 import type { PokemonDetailResponse } from "../../../api/types";
 
-const TYPE_COLORS: Record<string, string> = {
-  normal: "#A8A878",
-  fire: "#F08030",
-  water: "#6890F0",
-  electric: "#F8D030",
-  grass: "#78C850",
-  ice: "#98D8D8",
-  fighting: "#C03028",
-  poison: "#A040A0",
-  ground: "#E0C068",
-  flying: "#A890F0",
-  psychic: "#F85888",
-  bug: "#A8B820",
-  rock: "#B8A038",
-  ghost: "#705898",
-  dragon: "#7038F8",
-  dark: "#705848",
-  steel: "#B8B8D0",
-  fairy: "#EE99AC",
-};
-
+// Sourced from the centralized color tokens — no inline hex values.
+const TYPE_COLORS: Record<string, string> = { ...colors.pokemonTypes };
 const TYPE_BACKGROUNDS: Record<string, string> = {
-  normal: "#F0F0E8",
-  fire: "#FFF0E0",
-  water: "#E8F0FF",
-  electric: "#FFFBE0",
-  grass: "#EAF5E8",
-  ice: "#E8F8F8",
-  fighting: "#FDEAED",
-  poison: "#F5E8F8",
-  ground: "#FDF5E0",
-  flying: "#F0EBF8",
-  psychic: "#FDE8F0",
-  bug: "#F5F8E0",
-  rock: "#F5F0E8",
-  ghost: "#EDE8F5",
-  dragon: "#EAE8F8",
-  dark: "#EEEAE8",
-  steel: "#EEEFF5",
-  fairy: "#FDE8F0",
+  ...colors.pokemonTypeBackgrounds,
 };
 
 function formatId(id: number): string {
@@ -66,7 +32,8 @@ export function PokemonCard({ pokemon, onPress }: PokemonCardProps) {
     pokemon.sprites.front_default;
 
   const primaryType = pokemon.types[0]?.type.name ?? "normal";
-  const bgColor = TYPE_BACKGROUNDS[primaryType] ?? "#F5F5F0";
+  const bgColor =
+    TYPE_BACKGROUNDS[primaryType] ?? colors.pokemonTypeBackgrounds.normal;
 
   return (
     <Card elevation="sm" onPress={onPress} padding="$0">
@@ -79,7 +46,7 @@ export function PokemonCard({ pokemon, onPress }: PokemonCardProps) {
       >
         <Text
           fontSize="$2"
-          color={TYPE_COLORS[primaryType] ?? "#A8A878"}
+          color={TYPE_COLORS[primaryType] ?? colors.pokemonTypes.normal}
           fontWeight="700"
           alignSelf="flex-start"
           opacity={0.9}
@@ -90,14 +57,14 @@ export function PokemonCard({ pokemon, onPress }: PokemonCardProps) {
         {spriteUri ? (
           <Image
             source={{ uri: spriteUri }}
-            style={{ width: 110, height: 110 }}
+            style={styles.sprite}
             contentFit="contain"
           />
         ) : (
           <YStack width={110} height={110} />
         )}
 
-        <Text fontSize="$4" fontWeight="700" color="#1A1A1A">
+        <Text fontSize="$4" fontWeight="700" color="$lightText">
           {capitalize(pokemon.name)}
         </Text>
 
@@ -106,7 +73,7 @@ export function PokemonCard({ pokemon, onPress }: PokemonCardProps) {
             <Chip
               key={t.type.name}
               label={capitalize(t.type.name)}
-              color={TYPE_COLORS[t.type.name] ?? "#A8A878"}
+              color={TYPE_COLORS[t.type.name] ?? colors.pokemonTypes.normal}
             />
           ))}
         </XStack>
@@ -114,3 +81,10 @@ export function PokemonCard({ pokemon, onPress }: PokemonCardProps) {
     </Card>
   );
 }
+
+const styles = StyleSheet.create({
+  sprite: {
+    width: 110,
+    height: 110,
+  },
+});

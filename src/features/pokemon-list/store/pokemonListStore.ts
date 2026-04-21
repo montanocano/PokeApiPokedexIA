@@ -88,7 +88,10 @@ export function createPokemonListActions(
     },
 
     refreshList: async () => {
-      set(() => ({ ...initialState, isLoading: true }));
+      // Keep existing pokemon visible while the network call is in flight so the
+      // native pull-to-refresh spinner can stay active (isLoading && pokemon.length > 0).
+      // Clearing the array here would cause the full-screen loader to flash instead.
+      set(() => ({ isLoading: true, error: null, offset: 0 }));
       try {
         const { pokemon, hasMore } = await fetchPage(0);
         set(() => ({ pokemon, offset: PAGE_SIZE, hasMore, isLoading: false }));

@@ -1,4 +1,5 @@
 import client from "../../../shared/api/client";
+import { API_BASE_URL } from "../../../shared/config";
 import type {
   PokemonDetailResponse,
   PokemonListResponse,
@@ -17,7 +18,10 @@ export const pokemonListRepositoryImpl: DefaultPokemonRepository = {
   },
 
   async fetchPokemonDetail(url: string): Promise<PokemonDetailResponse> {
-    const response = await client.get<PokemonDetailResponse>(url);
+    const relativePath = url.startsWith(API_BASE_URL)
+      ? url.slice(API_BASE_URL.length)
+      : url;
+    const response = await client.get<PokemonDetailResponse>(relativePath);
     return response.data;
   },
 };

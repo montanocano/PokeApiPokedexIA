@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, YStack, XStack } from "tamagui";
 import { usePokemonList } from "../../src/features/pokemon-list/hooks/usePokemonList";
 import { PokemonCard } from "../../src/shared/ui/components/PokemonCard";
+import { colors } from "../../src/shared/ui/tokens/colors";
 import type { PokemonDetailResponse } from "../../src/shared/api/types";
 
 export default function PokedexScreen() {
@@ -29,7 +30,7 @@ export default function PokedexScreen() {
           justifyContent="center"
           backgroundColor="$background"
         >
-          <ActivityIndicator size="large" color="#CC0000" />
+          <ActivityIndicator size="large" color={colors.primary.brand} />
           <Text marginTop="$3" color="$colorSubtle" fontSize="$4">
             Loading Pokédex…
           </Text>
@@ -42,7 +43,7 @@ export default function PokedexScreen() {
     <SafeAreaView style={styles.container} edges={["top"]}>
       {/* Header */}
       <YStack
-        backgroundColor="#CC0000"
+        backgroundColor="$brand"
         paddingHorizontal="$5"
         paddingTop="$3"
         paddingBottom="$4"
@@ -52,7 +53,7 @@ export default function PokedexScreen() {
             <Text
               fontSize={32}
               fontWeight="800"
-              color="white"
+              color="$lightSurface"
               letterSpacing={-0.5}
             >
               Pokédex
@@ -62,7 +63,7 @@ export default function PokedexScreen() {
       </YStack>
 
       {/* Content */}
-      <YStack flex={1} backgroundColor="#F5F5F5">
+      <YStack flex={1} backgroundColor="$lightBackground">
         <FlatList<PokemonDetailResponse>
           data={pokemon}
           keyExtractor={(item) => String(item.id)}
@@ -80,7 +81,7 @@ export default function PokedexScreen() {
           ListFooterComponent={
             isLoading && pokemon.length > 0 ? (
               <View style={styles.footer}>
-                <ActivityIndicator color="#CC0000" />
+                <ActivityIndicator color={colors.primary.brand} />
               </View>
             ) : null
           }
@@ -88,14 +89,14 @@ export default function PokedexScreen() {
             <RefreshControl
               refreshing={isLoading && pokemon.length > 0}
               onRefresh={refreshList}
-              tintColor="#CC0000"
-              colors={["#CC0000"]}
+              tintColor={colors.primary.brand}
+              colors={[colors.primary.brand]}
             />
           }
         />
 
         {error ? (
-          <Text color="$red10" textAlign="center" padding="$3">
+          <Text color="$error" textAlign="center" padding="$3">
             {error}
           </Text>
         ) : null}
@@ -107,7 +108,7 @@ export default function PokedexScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#CC0000",
+    backgroundColor: colors.primary.brand,
   },
   list: {
     flex: 1,

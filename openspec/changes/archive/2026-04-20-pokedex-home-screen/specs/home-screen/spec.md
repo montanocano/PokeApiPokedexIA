@@ -58,7 +58,10 @@ The system SHALL render a loading spinner in the `FlatList`'s `ListFooterCompone
 - **THEN** no footer spinner SHALL render (a full-screen loader is used instead)
 
 ### Requirement: Pull-to-refresh
-The system SHALL configure the `FlatList`'s `refreshControl` prop to call `refreshList()` when the user pulls down.
+<!-- FIXED (refreshControl bug + hardcoded hex colors): Two issues were corrected:
+  1. The original `refreshing={isLoading && pokemon.length > 0}` evaluated to `false` immediately after pull-to-refresh because `refreshList` cleared the `pokemon` array before fetching. Fixed by changing `refreshList` to keep the array visible during the fetch; the fix is in the store, not the screen.
+  2. All hardcoded hex color strings (`"#CC0000"`, `"#F5F5F5"`, `"white"`, `"$red10"`) were replaced with Tamagui token references (`$brand`, `$lightBackground`, `$lightSurface`, `$error`) or imports from the centralized `colors.ts` file for non-Tamagui props (ActivityIndicator, RefreshControl). -->
+The system SHALL configure the `FlatList`'s `refreshControl` prop to call `refreshList()` when the user pulls down. All color values in the screen SHALL reference Tamagui tokens or the centralized `colors.ts` token file — no inline hex strings.
 
 #### Scenario: Pull-to-refresh resets the list
 - **WHEN** the user pulls down on the list

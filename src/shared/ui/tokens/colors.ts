@@ -27,6 +27,27 @@ export const colors = {
     fairy: "#EE99AC",
   },
 
+  pokemonTypeBackgrounds: {
+    normal: "#F0F0E8",
+    fire: "#FFF0E0",
+    water: "#E8F0FF",
+    electric: "#FFFBE0",
+    grass: "#EAF5E8",
+    ice: "#E8F8F8",
+    fighting: "#FDEAED",
+    poison: "#F5E8F8",
+    ground: "#FDF5E0",
+    flying: "#F0EBF8",
+    psychic: "#FDE8F0",
+    bug: "#F5F8E0",
+    rock: "#F5F0E8",
+    ghost: "#EDE8F5",
+    dragon: "#EAE8F8",
+    dark: "#EEEAE8",
+    steel: "#EEEFF5",
+    fairy: "#FDE8F0",
+  },
+
   theme: {
     light: {
       background: "#F5F5F5",

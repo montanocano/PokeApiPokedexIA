@@ -34,8 +34,8 @@ The system SHALL render the Pokemon's `id` formatted as a zero-padded three-digi
 
 ### Requirement: PokemonCard displays type badges with colors
 <!-- AGREE: Static `TYPE_COLORS` map is the right approach at this scale — types are fixed in the PokéAPI v2 stable dataset. -->
-<!-- DISAGREE (ignores existing Chip component): The project already has a `Chip` component in `src/shared/ui/components/Chip/` that accepts a `color` prop and handles contrast text color automatically. The type badge implementation should reuse `Chip` instead of duplicating badge rendering logic. -->
-The system SHALL render each of the Pokemon's types as a badge by passing the color from a static `TYPE_COLORS` map to the existing `Chip` component (`src/shared/ui/components/Chip/`). `PokemonCard` itself SHALL be located at `src/shared/ui/components/PokemonCard/index.tsx` and exported from `src/shared/ui/components/index.ts`.
+<!-- FIXED (type color and background maps): The original `TYPE_COLORS` and `TYPE_BACKGROUNDS` maps duplicated hex values inline in the component. Fixed by moving all hex values to `src/shared/ui/tokens/colors.ts` (as `pokemonTypes` and `pokemonTypeBackgrounds`) and registering them as Tamagui tokens in `tamagui.config.ts`. The component now builds both maps by spreading the centralized token values, eliminating the duplication. -->
+The system SHALL render each of the Pokemon's types as a badge by passing the color from a `TYPE_COLORS` map (sourced from `colors.pokemonTypes` in the centralized token file) to the existing `Chip` component (`src/shared/ui/components/Chip/`). `PokemonCard` itself SHALL be located at `src/shared/ui/components/PokemonCard/index.tsx` and exported from `src/shared/ui/components/index.ts`.
 
 #### Scenario: Type badges render with correct color
 - **WHEN** a Pokemon has `types: [{ type: { name: 'fire' } }]`
@@ -47,8 +47,8 @@ The system SHALL render each of the Pokemon's types as a badge by passing the co
 
 ### Requirement: PokemonCard has shadow and press interaction
 <!-- AGREE: Visual press feedback is essential for a list of interactive cards. -->
-<!-- DISAGREE (ignores existing Card component): The project already has a `Card` component in `src/shared/ui/components/Card/` with shadow variants (`sm`, `md`, `lg`) and a `pressStyle` opacity effect. PokemonCard should wrap `Card` instead of reimplementing shadow and press logic. -->
-The system SHALL wrap content in the existing `Card` component (`src/shared/ui/components/Card/`) which provides shadow tokens and press/hover opacity feedback.
+<!-- FIXED (Image inline style): The sprite `Image` previously used an inline style object `style={{ width: 110, height: 110 }}`, violating the no-inline-styles convention. Fixed by moving dimensions to a `StyleSheet.create` entry and referencing it as `style={styles.sprite}`. -->
+The system SHALL wrap content in the existing `Card` component (`src/shared/ui/components/Card/`) which provides shadow tokens and press/hover opacity feedback. The sprite `Image` dimensions SHALL be defined via `StyleSheet.create`, not inline style objects.
 
 #### Scenario: Card is pressable
 - **WHEN** the user presses the `PokemonCard`

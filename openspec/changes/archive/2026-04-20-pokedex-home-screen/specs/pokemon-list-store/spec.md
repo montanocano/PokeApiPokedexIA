@@ -45,7 +45,8 @@ The system SHALL expose a `loadMore()` action that appends the next page of Poke
 - **THEN** the action SHALL return early without making a network request
 
 ### Requirement: Refresh list action
-The system SHALL expose a `refreshList()` action that resets `offset` to `0`, clears `pokemon`, and re-fetches the first page.
+<!-- FIXED: The original implementation spread `initialState` (clearing `pokemon` to `[]`) before the network call. This caused the native pull-to-refresh spinner to immediately dismiss because `refreshing={isLoading && pokemon.length > 0}` evaluated to `false` the instant the array was cleared. Fixed by only resetting `offset` and `error` in `refreshList`, keeping the existing `pokemon` array visible during the fetch. The array is then replaced atomically once the new data arrives. -->
+The system SHALL expose a `refreshList()` action that resets `offset` to `0` and re-fetches the first page, keeping the existing `pokemon` visible during the fetch and replacing the array only once the new data arrives.
 
 #### Scenario: Successful refresh
 - **WHEN** `refreshList()` is called after the list has items
