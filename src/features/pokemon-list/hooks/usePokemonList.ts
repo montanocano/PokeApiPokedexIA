@@ -9,5 +9,13 @@ export function usePokemonList() {
   const loadMore = usePokemonListStore((s) => s.loadMore);
   const refreshList = usePokemonListStore((s) => s.refreshList);
 
-  return { pokemon, isLoading, error, hasMore, loadList, loadMore, refreshList };
+  return {
+    pokemon,
+    isLoading,
+    error,
+    hasMore,
+    loadList,
+    loadMore,
+    refreshList,
+  };
 }

@@ -50,9 +50,7 @@ async function fetchPage(offset: number): Promise<{
 }
 
 export function createPokemonListActions(
-  set: (
-    fn: (state: PokemonListStore) => Partial<PokemonListStore>,
-  ) => void,
+  set: (fn: (state: PokemonListStore) => Partial<PokemonListStore>) => void,
   get: () => PokemonListStore,
 ): PokemonListActions {
   return {

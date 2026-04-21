@@ -1,6 +1,6 @@
 import React from "react";
-import { TouchableOpacity, type TextInputProps } from "react-native";
-import { Input, Text, XStack } from "tamagui";
+import { TouchableOpacity } from "react-native";
+import { Input, Text, XStack, type ColorTokens } from "tamagui";
 import { colors } from "../../tokens/colors";
 import { borderRadius, sizes, spacing } from "../../tokens/spacing";
 import { fontSize } from "../../tokens/typography";
@@ -9,7 +9,7 @@ export interface SearchInputProps {
   value: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
-  onSubmitEditing?: TextInputProps["onSubmitEditing"];
+  onSubmitEditing?: (e: { nativeEvent: { text: string } }) => void;
 }
 
 export function SearchInput({
@@ -43,7 +43,7 @@ export function SearchInput({
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor={colors.theme.light.textSecondary}
+        placeholderTextColor={colors.theme.light.textSecondary as ColorTokens}
         onSubmitEditing={onSubmitEditing}
         returnKeyType="search"
         fontSize={fontSize.md}

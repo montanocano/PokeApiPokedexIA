@@ -29,7 +29,10 @@ const makeList = (next: string | null = "next"): PokemonListResponse => ({
 const makeDetail = (id: number): PokemonDetailResponse => ({
   id,
   name: `pokemon-${id}`,
-  sprites: { front_default: `https://example.com/${id}.png`, front_shiny: null },
+  sprites: {
+    front_default: `https://example.com/${id}.png`,
+    front_shiny: null,
+  },
   types: [{ slot: 1, type: { name: "grass", url: "" } }],
   stats: [],
 });

@@ -18,12 +18,17 @@ export default function PokedexScreen() {
 
   useEffect(() => {
     loadList();
-  }, []);
+  }, [loadList]);
 
   if (isLoading && pokemon.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
-        <YStack flex={1} alignItems="center" justifyContent="center" backgroundColor="$background">
+        <YStack
+          flex={1}
+          alignItems="center"
+          justifyContent="center"
+          backgroundColor="$background"
+        >
           <ActivityIndicator size="large" color="#CC0000" />
           <Text marginTop="$3" color="$colorSubtle" fontSize="$4">
             Loading Pokédex…
@@ -36,10 +41,20 @@ export default function PokedexScreen() {
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       {/* Header */}
-      <YStack backgroundColor="#CC0000" paddingHorizontal="$5" paddingTop="$3" paddingBottom="$4">
+      <YStack
+        backgroundColor="#CC0000"
+        paddingHorizontal="$5"
+        paddingTop="$3"
+        paddingBottom="$4"
+      >
         <XStack alignItems="center" gap="$2">
           <YStack flex={1}>
-            <Text fontSize={32} fontWeight="800" color="white" letterSpacing={-0.5}>
+            <Text
+              fontSize={32}
+              fontWeight="800"
+              color="white"
+              letterSpacing={-0.5}
+            >
               Pokédex
             </Text>
           </YStack>
