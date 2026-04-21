@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInputProps, TouchableOpacity } from "react-native";
+import { TouchableOpacity, type TextInputProps } from "react-native";
 import { Input, Text, XStack } from "tamagui";
 import { colors } from "../../tokens/colors";
 import { borderRadius, sizes, spacing } from "../../tokens/spacing";
