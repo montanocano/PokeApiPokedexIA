@@ -14,8 +14,15 @@ import { colors } from "../../src/shared/ui/tokens/colors";
 import type { PokemonDetailResponse } from "../../src/shared/api/types";
 
 export default function PokedexScreen() {
-  const { pokemon, isLoading, error, loadList, loadMore, refreshList } =
-    usePokemonList();
+  const {
+    pokemon,
+    isLoading,
+    isRefreshing,
+    error,
+    loadList,
+    loadMore,
+    refreshList,
+  } = usePokemonList();
 
   useEffect(() => {
     loadList();
@@ -87,7 +94,7 @@ export default function PokedexScreen() {
           }
           refreshControl={
             <RefreshControl
-              refreshing={isLoading && pokemon.length > 0}
+              refreshing={isRefreshing}
               onRefresh={refreshList}
               tintColor={colors.primary.brand}
               colors={[colors.primary.brand]}

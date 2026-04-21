@@ -43,6 +43,7 @@ beforeEach(() => {
     offset: 0,
     hasMore: true,
     isLoading: false,
+    isRefreshing: false,
     error: null,
   });
   jest.clearAllMocks();
@@ -84,6 +85,16 @@ describe("loadList", () => {
     expect(error).toBe("network error");
     expect(isLoading).toBe(false);
   });
+
+  it("extracts message from ApiError object on failure", async () => {
+    mockFetchList.mockRejectedValue({ status: 500, message: "server error" });
+
+    await usePokemonListStore.getState().loadList();
+
+    const { error, isLoading } = usePokemonListStore.getState();
+    expect(error).toBe("server error");
+    expect(isLoading).toBe(false);
+  });
 });
 
 describe("loadMore", () => {
@@ -119,7 +130,7 @@ describe("loadMore", () => {
 });
 
 describe("refreshList", () => {
-  it("clears existing pokemon and fetches from page 0", async () => {
+  it("replaces existing pokemon with refreshed results from page 0", async () => {
     usePokemonListStore.setState({ pokemon: [makeDetail(99)], offset: 40 });
     mockFetchList.mockResolvedValue(makeList());
     mockFetchDetail
@@ -131,5 +142,18 @@ describe("refreshList", () => {
     const { pokemon, offset } = usePokemonListStore.getState();
     expect(pokemon).toHaveLength(2);
     expect(offset).toBe(30);
+  });
+
+  it("uses isRefreshing not isLoading so loadMore guard is unaffected", async () => {
+    mockFetchList.mockResolvedValue(makeList());
+    mockFetchDetail
+      .mockResolvedValueOnce(makeDetail(1))
+      .mockResolvedValueOnce(makeDetail(2));
+
+    await usePokemonListStore.getState().refreshList();
+
+    const { isLoading, isRefreshing } = usePokemonListStore.getState();
+    expect(isLoading).toBe(false);
+    expect(isRefreshing).toBe(false);
   });
 });

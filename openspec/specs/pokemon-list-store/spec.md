@@ -19,7 +19,7 @@ The system SHALL expose a `loadList()` action that resets the store state and fe
 
 #### Scenario: Successful initial load
 - **WHEN** `loadList()` is called on a fresh or refreshed store
-- **THEN** `isLoading` SHALL be `true` during the fetch, and upon completion `pokemon` SHALL contain up to 20 items and `offset` SHALL be `30`
+- **THEN** `isLoading` SHALL be `true` during the fetch, and upon completion `pokemon` SHALL contain up to 30 items and `offset` SHALL be `30`
 
 #### Scenario: Load list sets hasMore correctly
 - **WHEN** the PokéAPI `next` field is non-null after the first page
@@ -45,7 +45,7 @@ The system SHALL expose a `loadMore()` action that appends the next page of Poke
 - **THEN** the action SHALL return early without making a network request
 
 ### Requirement: Refresh list action
-The system SHALL expose a `refreshList()` action that resets `offset` to `0`, clears `pokemon`, and re-fetches the first page.
+The system SHALL expose a `refreshList()` action that resets `offset` to `0`, keeps the existing `pokemon` array visible during the fetch (so the native pull-to-refresh spinner remains active), and replaces `pokemon` with the fresh first page on completion.
 
 #### Scenario: Successful refresh
 - **WHEN** `refreshList()` is called after the list has items

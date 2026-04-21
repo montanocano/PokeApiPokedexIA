@@ -1,6 +1,19 @@
 import type { PokemonDetailResponse } from "../../../shared/api/types";
 import { pokemonListRepositoryImpl } from "../repositories/pokemonListRepositoryImpl";
 
+function extractErrorMessage(e: unknown): string {
+  if (e instanceof Error) return e.message;
+  if (
+    typeof e === "object" &&
+    e !== null &&
+    "message" in e &&
+    typeof (e as Record<string, unknown>).message === "string"
+  ) {
+    return (e as { message: string }).message;
+  }
+  return String(e);
+}
+
 const PAGE_SIZE = 30;
 
 export interface PokemonListState {
@@ -8,6 +21,7 @@ export interface PokemonListState {
   offset: number;
   hasMore: boolean;
   isLoading: boolean;
+  isRefreshing: boolean;
   error: string | null;
 }
 
@@ -24,6 +38,7 @@ export const initialState: PokemonListState = {
   offset: 0,
   hasMore: true,
   isLoading: false,
+  isRefreshing: false,
   error: null,
 };
 
@@ -62,14 +77,14 @@ export function createPokemonListActions(
       } catch (e) {
         set(() => ({
           isLoading: false,
-          error: e instanceof Error ? e.message : String(e),
+          error: extractErrorMessage(e),
         }));
       }
     },
 
     loadMore: async () => {
-      const { isLoading, hasMore, offset } = get();
-      if (isLoading || !hasMore) return;
+      const { isLoading, isRefreshing, hasMore, offset } = get();
+      if (isLoading || isRefreshing || !hasMore) return;
       set(() => ({ isLoading: true, error: null }));
       try {
         const { pokemon: newPokemon, hasMore: more } = await fetchPage(offset);
@@ -82,23 +97,27 @@ export function createPokemonListActions(
       } catch (e) {
         set(() => ({
           isLoading: false,
-          error: e instanceof Error ? e.message : String(e),
+          error: extractErrorMessage(e),
         }));
       }
     },
 
     refreshList: async () => {
-      // Keep existing pokemon visible while the network call is in flight so the
-      // native pull-to-refresh spinner can stay active (isLoading && pokemon.length > 0).
-      // Clearing the array here would cause the full-screen loader to flash instead.
-      set(() => ({ isLoading: true, error: null, offset: 0 }));
+      // Use isRefreshing (not isLoading) so the pull-to-refresh spinner is
+      // independent from the pagination footer spinner and the loadMore guard.
+      set(() => ({ isRefreshing: true, error: null, offset: 0 }));
       try {
         const { pokemon, hasMore } = await fetchPage(0);
-        set(() => ({ pokemon, offset: PAGE_SIZE, hasMore, isLoading: false }));
+        set(() => ({
+          pokemon,
+          offset: PAGE_SIZE,
+          hasMore,
+          isRefreshing: false,
+        }));
       } catch (e) {
         set(() => ({
-          isLoading: false,
-          error: e instanceof Error ? e.message : String(e),
+          isRefreshing: false,
+          error: extractErrorMessage(e),
         }));
       }
     },
