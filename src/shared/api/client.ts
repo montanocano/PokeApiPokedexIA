@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios";
+import { API_BASE_URL, API_TIMEOUT_MS } from "../config";
 import type { ApiError } from "./types";
 
 const client = axios.create({
-  baseURL: "https://pokeapi.co/api/v2/",
-  timeout: 10000,
+  baseURL: API_BASE_URL,
+  timeout: API_TIMEOUT_MS,
 });
 
 client.interceptors.response.use(

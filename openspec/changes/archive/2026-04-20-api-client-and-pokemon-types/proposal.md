@@ -6,9 +6,8 @@ The project needs a reusable HTTP client layer and well-defined TypeScript types
 
 ## What Changes
 
-<!-- DISAGREE (path): Should be `src/shared/api/` not `src/api/` — design.md and tasks.md both use the correct path. -->
-- Create `src/api/client.ts`: an axios instance pre-configured with PokéAPI's baseURL, request/response interceptors for error handling, and a default timeout.
-- Create `src/api/types.ts`: TypeScript interfaces covering the full shape of PokéAPI responses (`Pokemon`, `PokemonType`, `PokemonListResponse`, `PokemonDetailResponse`) plus type guards where needed.
+- Create `src/shared/api/client.ts`: an axios instance pre-configured with PokéAPI's baseURL, request/response interceptors for error handling, and a default timeout.
+- Create `src/shared/api/types.ts`: TypeScript interfaces covering the full shape of PokéAPI responses (`Pokemon`, `PokemonType`, `PokemonListResponse`, `PokemonDetailResponse`) plus type guards where needed.
 - Add unit tests for the HTTP client configuration.
 
 ## Capabilities
@@ -25,9 +24,7 @@ The project needs a reusable HTTP client layer and well-defined TypeScript types
 
 ## Impact
 
-<!-- DISAGREE (path): Same `src/api/` vs `src/shared/api/` inconsistency as above. -->
-<!-- DISAGREE (axios assumption): axios is NOT in `package.json` — it must be installed, not assumed. -->
-- New files: `src/api/client.ts`, `src/api/types.ts`, and their corresponding test files.
+- New files: `src/shared/api/client.ts`, `src/shared/api/types.ts`, and their corresponding test files.
 - All future API service modules will import from these two files.
 - No breaking changes — these are net-new additions.
-- Dependency: `axios` must be available (assumed already in project).
+- Dependency: `axios` added to `package.json` as part of this change.
