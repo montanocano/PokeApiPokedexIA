@@ -8,12 +8,14 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, YStack, XStack } from "tamagui";
+import { useRouter } from "expo-router";
 import { usePokemonList } from "../../src/features/pokemon-list/hooks/usePokemonList";
 import { PokemonCard } from "../../src/shared/ui/components/PokemonCard";
 import { colors } from "../../src/shared/ui/tokens/colors";
 import type { PokemonDetailResponse } from "../../src/shared/api/types";
 
 export default function PokedexScreen() {
+  const router = useRouter();
   const { pokemon, isLoading, error, loadList, loadMore, refreshList } =
     usePokemonList();
 
@@ -73,7 +75,15 @@ export default function PokedexScreen() {
           contentContainerStyle={styles.listContent}
           renderItem={({ item }) => (
             <View style={styles.cardWrapper}>
-              <PokemonCard pokemon={item} />
+              <PokemonCard
+                pokemon={item}
+                onPress={() =>
+                  router.push({
+                    pathname: "/detail/[id]",
+                    params: { id: item.id },
+                  })
+                }
+              />
             </View>
           )}
           onEndReached={loadMore}

@@ -29,6 +29,18 @@ const detailResponse: PokemonDetailResponse = {
       stat: { name: "hp", url: "https://pokeapi.co/api/v2/stat/1/" },
     },
   ],
+  height: 7,
+  weight: 69,
+  abilities: [
+    {
+      ability: {
+        name: "overgrow",
+        url: "https://pokeapi.co/api/v2/ability/65/",
+      },
+      is_hidden: false,
+      slot: 1,
+    },
+  ],
 };
 
 describe("isPokemonListResponse", () => {

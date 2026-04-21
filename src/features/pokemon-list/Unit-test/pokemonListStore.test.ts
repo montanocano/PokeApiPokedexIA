@@ -35,6 +35,9 @@ const makeDetail = (id: number): PokemonDetailResponse => ({
   },
   types: [{ slot: 1, type: { name: "grass", url: "" } }],
   stats: [],
+  height: 7,
+  weight: 69,
+  abilities: [],
 });
 
 beforeEach(() => {
