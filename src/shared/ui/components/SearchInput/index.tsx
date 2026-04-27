@@ -1,6 +1,11 @@
 import React from "react";
-import { TouchableOpacity, type TextInputProps } from "react-native";
-import { Input, Text, XStack } from "tamagui";
+import {
+  TextInput,
+  TouchableOpacity,
+  type TextInputProps,
+  StyleSheet,
+} from "react-native";
+import { Text, XStack } from "tamagui";
 import { colors } from "../../tokens/colors";
 import { borderRadius, sizes, spacing } from "../../tokens/spacing";
 import { fontSize } from "../../tokens/typography";
@@ -37,18 +42,14 @@ export function SearchInput({
         🔍
       </Text>
 
-      <Input
-        unstyled
-        flex={1}
+      <TextInput
+        style={styles.input}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor={colors.theme.light.textSecondary}
         onSubmitEditing={onSubmitEditing}
         returnKeyType="search"
-        fontSize={fontSize.md}
-        color={colors.theme.light.text}
-        padding={0}
       />
 
       {value.length > 0 && (
@@ -69,3 +70,12 @@ export function SearchInput({
     </XStack>
   );
 }
+
+const styles = StyleSheet.create({
+  input: {
+    flex: 1,
+    fontSize: fontSize.md,
+    color: colors.theme.light.text,
+    padding: 0,
+  },
+});

@@ -6,7 +6,7 @@ import { config } from "../tamagui.config";
 export default function RootLayout() {
   return (
     <TamaguiProvider config={config} defaultTheme="light">
-      <Stack />
+      <Stack screenOptions={{ headerShown: false }} />
     </TamaguiProvider>
   );
 }
