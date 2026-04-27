@@ -47,7 +47,7 @@ export default function PokedexScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
       {/* Header */}
       <YStack
         backgroundColor="$brand"
