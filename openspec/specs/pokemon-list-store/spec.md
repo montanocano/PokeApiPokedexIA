@@ -1,14 +1,14 @@
 ## Requirements
 
 ### Requirement: Pokemon list store state shape
-The system SHALL define the store state in `src/features/pokemon-list/store/pokemonListStore.ts` with fields: `pokemon` (array of `PokemonDetailResponse`), `offset` (number), `hasMore` (boolean), `isLoading` (boolean), and `error` (string or null). The Zustand store instance SHALL be created and exported from `store/store.ts` as `usePokemonListStore`.
+The system SHALL define the store state in `src/features/pokemon-list/store/pokemonListStore.ts` with fields: `pokemon` (array of `PokemonDetailResponse`), `offset` (number), `hasMore` (boolean), `isLoading` (boolean), `isRefreshing` (boolean), and `error` (string or null). The Zustand store instance SHALL be created and exported from `store/store.ts` as `usePokemonListStore`.
 
 #### Scenario: Initial store state
 - **WHEN** the store is accessed before any action is dispatched
-- **THEN** `pokemon` SHALL be an empty array, `offset` SHALL be `0`, `hasMore` SHALL be `true`, `isLoading` SHALL be `false`, and `error` SHALL be `null`
+- **THEN** `pokemon` SHALL be an empty array, `offset` SHALL be `0`, `hasMore` SHALL be `true`, `isLoading` SHALL be `false`, `isRefreshing` SHALL be `false`, and `error` SHALL be `null`
 
 ### Requirement: usePokemonList hook
-The system SHALL provide `src/features/pokemon-list/hooks/usePokemonList.ts` that wraps `usePokemonListStore` and exposes `pokemon`, `isLoading`, `error`, `hasMore`, `loadList`, `loadMore`, and `refreshList` as a single hook. The home screen SHALL import only this hook, not the store directly.
+The system SHALL provide `src/features/pokemon-list/hooks/usePokemonList.ts` that wraps `usePokemonListStore` and exposes `pokemon`, `isLoading`, `isRefreshing`, `error`, `hasMore`, `loadList`, `loadMore`, and `refreshList` as a single hook. The home screen SHALL import only this hook, not the store directly.
 
 #### Scenario: Hook exposes store state and actions
 - **WHEN** a component calls `usePokemonList()`
