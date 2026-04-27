@@ -11,7 +11,7 @@ The system SHALL define a `DefaultPokemonRepository` interface in `src/features/
 The system SHALL provide `fetchPokemonList(offset: number, limit: number)` in `pokemonListRepositoryImpl.ts` that calls the HTTP client's `GET /pokemon` endpoint and returns a typed `PokemonListResponse`.
 
 #### Scenario: Successful list fetch
-- **WHEN** `fetchPokemonList(0, 20)` is called
+- **WHEN** `fetchPokemonList(0, 30)` is called
 - **THEN** the function SHALL return a `PokemonListResponse` with `count`, `next`, `previous`, and `results` populated
 
 #### Scenario: API error during list fetch
@@ -19,11 +19,11 @@ The system SHALL provide `fetchPokemonList(offset: number, limit: number)` in `p
 - **THEN** `fetchPokemonList` SHALL propagate the error to the caller without swallowing it
 
 ### Requirement: Fetch Pokemon detail by URL
-The system SHALL provide `fetchPokemonDetail(url: string)` in `pokemonListRepositoryImpl.ts` that calls the HTTP client with the full PokéAPI resource URL and returns a typed `PokemonDetailResponse` containing `id`, `name`, `sprites`, `types`, and `stats`.
+The system SHALL provide `fetchPokemonDetail(url: string)` in `pokemonListRepositoryImpl.ts` that strips the `API_BASE_URL` prefix from the given URL and calls the HTTP client with the resulting relative path, returning a typed `PokemonDetailResponse` containing `id`, `name`, `sprites`, `types`, and `stats`.
 
 #### Scenario: Successful detail fetch
 - **WHEN** `fetchPokemonDetail('https://pokeapi.co/api/v2/pokemon/1/')` is called
-- **THEN** the function SHALL return a `PokemonDetailResponse` with `sprites.front_default`, `types`, and `stats` present
+- **THEN** the implementation SHALL derive the relative path `/pokemon/1/`, call the HTTP client with that path, and return a `PokemonDetailResponse` with `sprites.front_default`, `types`, and `stats` present
 
 #### Scenario: Network error during detail fetch
 - **WHEN** the HTTP client rejects with an `ApiError` whose `status` is `0`

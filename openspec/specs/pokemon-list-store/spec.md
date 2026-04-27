@@ -1,14 +1,14 @@
 ## Requirements
 
 ### Requirement: Pokemon list store state shape
-The system SHALL define the store state in `src/features/pokemon-list/store/pokemonListStore.ts` with fields: `pokemon` (array of `PokemonDetailResponse`), `offset` (number), `hasMore` (boolean), `isLoading` (boolean), and `error` (string or null). The Zustand store instance SHALL be created and exported from `store/store.ts` as `usePokemonListStore`.
+The system SHALL define the store state in `src/features/pokemon-list/store/pokemonListStore.ts` with fields: `pokemon` (array of `PokemonDetailResponse`), `offset` (number), `hasMore` (boolean), `isLoading` (boolean), `isRefreshing` (boolean), and `error` (string or null). The Zustand store instance SHALL be created and exported from `store/store.ts` as `usePokemonListStore`.
 
 #### Scenario: Initial store state
 - **WHEN** the store is accessed before any action is dispatched
-- **THEN** `pokemon` SHALL be an empty array, `offset` SHALL be `0`, `hasMore` SHALL be `true`, `isLoading` SHALL be `false`, and `error` SHALL be `null`
+- **THEN** `pokemon` SHALL be an empty array, `offset` SHALL be `0`, `hasMore` SHALL be `true`, `isLoading` SHALL be `false`, `isRefreshing` SHALL be `false`, and `error` SHALL be `null`
 
 ### Requirement: usePokemonList hook
-The system SHALL provide `src/features/pokemon-list/hooks/usePokemonList.ts` that wraps `usePokemonListStore` and exposes `pokemon`, `isLoading`, `error`, `hasMore`, `loadList`, `loadMore`, and `refreshList` as a single hook. The home screen SHALL import only this hook, not the store directly.
+The system SHALL provide `src/features/pokemon-list/hooks/usePokemonList.ts` that wraps `usePokemonListStore` and exposes `pokemon`, `isLoading`, `isRefreshing`, `error`, `hasMore`, `loadList`, `loadMore`, and `refreshList` as a single hook. The home screen SHALL import only this hook, not the store directly.
 
 #### Scenario: Hook exposes store state and actions
 - **WHEN** a component calls `usePokemonList()`
@@ -19,7 +19,7 @@ The system SHALL expose a `loadList()` action that resets the store state and fe
 
 #### Scenario: Successful initial load
 - **WHEN** `loadList()` is called on a fresh or refreshed store
-- **THEN** `isLoading` SHALL be `true` during the fetch, and upon completion `pokemon` SHALL contain up to 20 items and `offset` SHALL be `30`
+- **THEN** `isLoading` SHALL be `true` during the fetch, and upon completion `pokemon` SHALL contain up to 30 items and `offset` SHALL be `30`
 
 #### Scenario: Load list sets hasMore correctly
 - **WHEN** the PokéAPI `next` field is non-null after the first page
@@ -45,7 +45,7 @@ The system SHALL expose a `loadMore()` action that appends the next page of Poke
 - **THEN** the action SHALL return early without making a network request
 
 ### Requirement: Refresh list action
-The system SHALL expose a `refreshList()` action that resets `offset` to `0`, clears `pokemon`, and re-fetches the first page.
+The system SHALL expose a `refreshList()` action that resets `offset` to `0`, keeps the existing `pokemon` array visible during the fetch (so the native pull-to-refresh spinner remains active), and replaces `pokemon` with the fresh first page on completion.
 
 #### Scenario: Successful refresh
 - **WHEN** `refreshList()` is called after the list has items

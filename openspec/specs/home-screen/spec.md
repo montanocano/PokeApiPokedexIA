@@ -33,7 +33,7 @@ The system SHALL render the Pokemon list using a `FlatList` where each item rend
 
 #### Scenario: List loads on mount
 - **WHEN** the home screen mounts for the first time
-- **THEN** `loadList()` SHALL be called and the first 20 Pokemon SHALL be rendered as `PokemonCard` items
+- **THEN** `loadList()` SHALL be called and the first 30 Pokemon SHALL be rendered as `PokemonCard` items
 
 #### Scenario: Empty state while loading
 - **WHEN** `isLoading` is `true` and `pokemon` is empty
@@ -44,7 +44,7 @@ The system SHALL configure `FlatList`'s `onEndReached` to call `loadMore()` and 
 
 #### Scenario: More Pokemon load on scroll
 - **WHEN** the user scrolls to 30% from the bottom of the list
-- **THEN** `loadMore()` SHALL be called and the next 20 Pokemon SHALL be appended to the list
+- **THEN** `loadMore()` SHALL be called and the next 30 Pokemon SHALL be appended to the list
 
 ### Requirement: Footer loading spinner
 The system SHALL render a loading spinner in the `FlatList`'s `ListFooterComponent` while `isLoading` is `true` and the list already has items.
