@@ -52,7 +52,8 @@ export function PokemonBasicInfoSection({
     .filter((a) => a.is_hidden)
     .map((a) => capitalize(a.ability.name));
 
-  const normalLabel = normalAbilities.length > 0 ? normalAbilities.join(", ") : "—";
+  const normalLabel =
+    normalAbilities.length > 0 ? normalAbilities.join(", ") : "—";
 
   return (
     <YStack padding={spacing[4]} gap={spacing[3]}>

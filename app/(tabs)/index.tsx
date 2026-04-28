@@ -37,7 +37,12 @@ export default function PokedexScreen() {
   // When type filters are active, keep loading pages until all Pokémon are
   // fetched so the filter searches the full Pokédex, not just loaded pages.
   useEffect(() => {
-    if (activeTypeFilters.length > 0 && !isLoading && !isRefreshing && hasMore) {
+    if (
+      activeTypeFilters.length > 0 &&
+      !isLoading &&
+      !isRefreshing &&
+      hasMore
+    ) {
       loadMore();
     }
   }, [activeTypeFilters.length, isLoading, isRefreshing, hasMore, loadMore]);
