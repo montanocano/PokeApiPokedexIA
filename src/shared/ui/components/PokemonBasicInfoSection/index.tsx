@@ -44,12 +44,15 @@ interface PokemonBasicInfoSectionProps {
 export function PokemonBasicInfoSection({
   pokemon,
 }: PokemonBasicInfoSectionProps) {
-  const visibleAbilities = pokemon.abilities
+  const normalAbilities = pokemon.abilities
     .filter((a) => !a.is_hidden)
     .map((a) => capitalize(a.ability.name));
 
-  const abilitiesLabel =
-    visibleAbilities.length > 0 ? visibleAbilities.join(", ") : "—";
+  const hiddenAbilities = pokemon.abilities
+    .filter((a) => a.is_hidden)
+    .map((a) => capitalize(a.ability.name));
+
+  const normalLabel = normalAbilities.length > 0 ? normalAbilities.join(", ") : "—";
 
   return (
     <YStack padding={spacing[4]} gap={spacing[3]}>
@@ -87,11 +90,33 @@ export function PokemonBasicInfoSection({
               fontWeight="600"
               color={colors.primary.text}
             >
-              {abilitiesLabel}
+              {normalLabel}
             </Text>
           </YStack>
         </XStack>
       </Card>
+      {hiddenAbilities.length > 0 && (
+        <Card elevation="sm" padding={spacing[3]}>
+          <XStack alignItems="center" gap={spacing[2]}>
+            <Text fontSize={fontSize.xl}>🔮</Text>
+            <YStack flex={1}>
+              <Text
+                fontSize={fontSize.sm}
+                color={colors.theme.light.textSecondary}
+              >
+                Hidden Ability
+              </Text>
+              <Text
+                fontSize={fontSize.md}
+                fontWeight="600"
+                color={colors.primary.text}
+              >
+                {hiddenAbilities.join(", ")}
+              </Text>
+            </YStack>
+          </XStack>
+        </Card>
+      )}
     </YStack>
   );
 }

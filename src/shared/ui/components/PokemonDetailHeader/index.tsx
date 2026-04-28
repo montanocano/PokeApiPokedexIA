@@ -4,10 +4,14 @@ import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { YStack, XStack, Text } from "tamagui";
 import { Chip } from "../Chip";
+import { FavoriteButton } from "../FavoriteButton";
 import { colors } from "../../tokens/colors";
 import { spacing } from "../../tokens/spacing";
 import { fontSize } from "../../tokens/typography";
-import { formatId, capitalize } from "../../../../features/pokemon-detail/utils/formatters";
+import {
+  formatId,
+  capitalize,
+} from "../../../../features/pokemon-detail/utils/formatters";
 import type { PokemonDetailResponse } from "../../../api/types";
 
 const TYPE_COLORS: Record<string, string> = { ...colors.pokemonTypes };
@@ -34,7 +38,12 @@ export function PokemonDetailHeader({ pokemon }: PokemonDetailHeaderProps) {
   return (
     <YStack backgroundColor={bgColor} paddingBottom={spacing[6]}>
       {/* Back button row */}
-      <XStack paddingHorizontal={spacing[4]} paddingTop={spacing[10]}>
+      <XStack
+        paddingHorizontal={spacing[4]}
+        paddingTop={spacing[10]}
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <TouchableOpacity onPress={() => router.back()} activeOpacity={0.7}>
           <Text
             fontSize={fontSize.lg}
@@ -44,6 +53,7 @@ export function PokemonDetailHeader({ pokemon }: PokemonDetailHeaderProps) {
             ← Back
           </Text>
         </TouchableOpacity>
+        <FavoriteButton pokemonId={pokemon.id} size={28} />
       </XStack>
 
       {/* Artwork */}

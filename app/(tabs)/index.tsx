@@ -8,28 +8,41 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, YStack, XStack } from "tamagui";
-import { router, useRouter } from "expo-router";
+import { router } from "expo-router";
+import { useShallow } from "zustand/react/shallow";
 import { usePokemonList } from "../../src/features/pokemon-list/hooks/usePokemonList";
 import { PokemonCard } from "../../src/shared/ui/components/PokemonCard";
+import { SearchBar } from "../../src/shared/ui/components/SearchBar";
+import { TypeFilter } from "../../src/shared/ui/components/TypeFilter";
+import { usePokemonListStore } from "../../src/features/pokemon-list/store/store";
+import { selectFilteredPokemon } from "../../src/features/pokemon-list/store/pokemonListStore";
 import { colors } from "../../src/shared/ui/tokens/colors";
 import type { PokemonDetailResponse } from "../../src/shared/api/types";
 
 export default function PokedexScreen() {
-  const {
-    pokemon,
-    isLoading,
-    isRefreshing,
-    error,
-    loadList,
-    loadMore,
-    refreshList,
-  } = usePokemonList();
+  const { isLoading, isRefreshing, error, loadList, loadMore, refreshList } =
+    usePokemonList();
+
+  const filteredPokemon = usePokemonListStore(
+    useShallow(selectFilteredPokemon),
+  );
+
+  const activeTypeFilters = usePokemonListStore((s) => s.activeTypeFilters);
+  const hasMore = usePokemonListStore((s) => s.hasMore);
 
   useEffect(() => {
     loadList();
   }, [loadList]);
 
-  if (isLoading && pokemon.length === 0) {
+  // When type filters are active, keep loading pages until all Pokémon are
+  // fetched so the filter searches the full Pokédex, not just loaded pages.
+  useEffect(() => {
+    if (activeTypeFilters.length > 0 && !isLoading && !isRefreshing && hasMore) {
+      loadMore();
+    }
+  }, [activeTypeFilters.length, isLoading, isRefreshing, hasMore, loadMore]);
+
+  if (isLoading && filteredPokemon.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
         <YStack
@@ -72,8 +85,13 @@ export default function PokedexScreen() {
 
       {/* Content */}
       <YStack flex={1} backgroundColor="$lightBackground">
+        <YStack paddingHorizontal="$4" paddingTop="$3" gap="$2">
+          <SearchBar />
+          <TypeFilter />
+        </YStack>
+
         <FlatList<PokemonDetailResponse>
-          data={pokemon}
+          data={filteredPokemon}
           keyExtractor={(item) => String(item.id)}
           numColumns={2}
           style={styles.list}
@@ -95,7 +113,7 @@ export default function PokedexScreen() {
           onEndReached={loadMore}
           onEndReachedThreshold={0.3}
           ListFooterComponent={
-            isLoading && pokemon.length > 0 ? (
+            isLoading && filteredPokemon.length > 0 ? (
               <View style={styles.footer}>
                 <ActivityIndicator color={colors.primary.brand} />
               </View>

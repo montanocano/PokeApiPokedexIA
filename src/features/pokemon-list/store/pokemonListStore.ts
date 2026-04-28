@@ -1,5 +1,6 @@
 import type { PokemonDetailResponse } from "../../../shared/api/types";
 import { pokemonListRepositoryImpl } from "../repositories/pokemonListRepositoryImpl";
+import { filterPokemon } from "../search-filter/utils/filterPokemon";
 
 function extractErrorMessage(e: unknown): string {
   if (e instanceof Error) return e.message;
@@ -23,12 +24,17 @@ export interface PokemonListState {
   isLoading: boolean;
   isRefreshing: boolean;
   error: string | null;
+  searchQuery: string;
+  activeTypeFilters: string[];
 }
 
 export interface PokemonListActions {
   loadList: () => Promise<void>;
   loadMore: () => Promise<void>;
   refreshList: () => Promise<void>;
+  setSearchQuery: (query: string) => void;
+  toggleTypeFilter: (type: string) => void;
+  clearFilters: () => void;
 }
 
 export type PokemonListStore = PokemonListState & PokemonListActions;
@@ -40,7 +46,19 @@ export const initialState: PokemonListState = {
   isLoading: false,
   isRefreshing: false,
   error: null,
+  searchQuery: "",
+  activeTypeFilters: [],
 };
+
+export function selectFilteredPokemon(
+  state: PokemonListStore,
+): PokemonDetailResponse[] {
+  return filterPokemon(
+    state.pokemon,
+    state.searchQuery,
+    state.activeTypeFilters,
+  );
+}
 
 async function fetchPage(offset: number): Promise<{
   pokemon: PokemonDetailResponse[];
@@ -69,6 +87,24 @@ export function createPokemonListActions(
   get: () => PokemonListStore,
 ): PokemonListActions {
   return {
+    setSearchQuery: (query: string) => {
+      set(() => ({ searchQuery: query }));
+    },
+
+    toggleTypeFilter: (type: string) => {
+      set((state) => {
+        const active = state.activeTypeFilters;
+        const next = active.includes(type)
+          ? active.filter((t) => t !== type)
+          : [...active, type];
+        return { activeTypeFilters: next };
+      });
+    },
+
+    clearFilters: () => {
+      set(() => ({ searchQuery: "", activeTypeFilters: [] }));
+    },
+
     loadList: async () => {
       set(() => ({ ...initialState, isLoading: true }));
       try {
