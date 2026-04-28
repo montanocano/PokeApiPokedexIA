@@ -20,8 +20,15 @@ import { colors } from "../../src/shared/ui/tokens/colors";
 import type { PokemonDetailResponse } from "../../src/shared/api/types";
 
 export default function PokedexScreen() {
-  const { isLoading, isRefreshing, error, loadList, loadMore, refreshList } =
-    usePokemonList();
+  const {
+    pokemon,
+    isLoading,
+    isRefreshing,
+    error,
+    loadList,
+    loadMore,
+    refreshList,
+  } = usePokemonList();
 
   const filteredPokemon = usePokemonListStore(
     useShallow(selectFilteredPokemon),
@@ -47,7 +54,7 @@ export default function PokedexScreen() {
     }
   }, [activeTypeFilters.length, isLoading, isRefreshing, hasMore, loadMore]);
 
-  if (isLoading && filteredPokemon.length === 0) {
+  if (isLoading && pokemon.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
         <YStack
@@ -94,6 +101,22 @@ export default function PokedexScreen() {
           <SearchBar />
           <TypeFilter />
         </YStack>
+
+        {activeTypeFilters.length > 0 && hasMore && isLoading && (
+          <XStack
+            alignItems="center"
+            justifyContent="center"
+            gap="$2"
+            paddingVertical="$2"
+            backgroundColor="$brand"
+            opacity={0.9}
+          >
+            <ActivityIndicator size="small" color="white" />
+            <Text color="white" fontSize="$3">
+              Searching all Pokémon…
+            </Text>
+          </XStack>
+        )}
 
         <FlatList<PokemonDetailResponse>
           data={filteredPokemon}

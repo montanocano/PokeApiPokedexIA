@@ -22,8 +22,8 @@ The system SHALL display an empty-state message when the user has no saved Poké
 - **THEN** a message or illustration SHALL inform the user that no Pokémon have been saved
 
 ### Requirement: Feature folder structure
-The system SHALL place Favorites screen logic under `features/favorites-screen/` with `hooks/`, `store/`, and `Unit-test/` sub-folders following the co-location pattern used by `pokemon-details`.
+The system SHALL place Favorites logic under `src/features/pokemon-favorite/` with `hooks/`, `store/`, and `Unit-test/` sub-folders following the co-location pattern used by `pokemon-detail`.
 
 #### Scenario: Favorites hook exists
 - **WHEN** the Favorites screen mounts
-- **THEN** a `useFavorites` hook from `features/favorites-screen/hooks/` SHALL provide the list of favourited Pokémon
+- **THEN** a `useFavoriteList` hook from `src/features/pokemon-favorite/hooks/` SHALL provide the list of favourited Pokémon

@@ -2,11 +2,9 @@
  * UI tests for DetailScreen, PokemonDetailHeader, PokemonBasicInfoSection,
  * and PokemonStatsSection.
  *
- * Component render tests require @testing-library/react-native (not yet installed).
- * See .claude/testing.md for the recommended installation steps:
- *   npm install --save-dev @testing-library/react-native @testing-library/jest-native
- *
  * The tests below cover pure utility logic used by the UI components.
+ * Component render tests can be added using @testing-library/react-native
+ * (already installed as a dev dependency).
  */
 import {
   formatId,

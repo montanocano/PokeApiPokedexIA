@@ -6,17 +6,22 @@ export function useSearchFilter() {
   const setSearchQuery = usePokemonListStore((s) => s.setSearchQuery);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const cancelPending = useCallback(() => {
+    if (timerRef.current !== null) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
+
   const handleQueryChange = useCallback(
     (query: string) => {
-      if (timerRef.current !== null) {
-        clearTimeout(timerRef.current);
-      }
+      cancelPending();
       timerRef.current = setTimeout(() => {
         setSearchQuery(query);
       }, SEARCH_DEBOUNCE_MS);
     },
-    [setSearchQuery],
+    [setSearchQuery, cancelPending],
   );
 
-  return { handleQueryChange, setSearchQuery };
+  return { handleQueryChange, setSearchQuery, cancelPending };
 }

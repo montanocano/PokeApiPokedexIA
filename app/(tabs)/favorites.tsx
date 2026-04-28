@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, YStack, XStack } from "tamagui";
 import { Ionicons } from "@expo/vector-icons";
@@ -10,7 +10,17 @@ import { colors } from "../../src/shared/ui/tokens/colors";
 import type { PokemonDetailResponse } from "../../src/shared/api/types";
 
 export default function FavoritesScreen() {
-  const { favoritePokemon } = useFavoriteList();
+  const { favoritePokemon, isHydrated } = useFavoriteList();
+
+  if (!isHydrated) {
+    return (
+      <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+        <YStack flex={1} alignItems="center" justifyContent="center">
+          <ActivityIndicator size="large" color={colors.primary.brand} />
+        </YStack>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={["top", "bottom"]}>

@@ -5,7 +5,12 @@ import { useRouter } from "expo-router";
 import { YStack, XStack, Text } from "tamagui";
 import { Chip } from "../Chip";
 import { FavoriteButton } from "../FavoriteButton";
-import { colors } from "../../tokens/colors";
+import {
+  colors,
+  TYPE_COLORS,
+  TYPE_BACKGROUNDS,
+  type PokemonType,
+} from "../../tokens/colors";
 import { spacing } from "../../tokens/spacing";
 import { fontSize } from "../../tokens/typography";
 import {
@@ -14,10 +19,6 @@ import {
 } from "../../../../features/pokemon-detail/utils/formatters";
 import type { PokemonDetailResponse } from "../../../api/types";
 
-const TYPE_COLORS: Record<string, string> = { ...colors.pokemonTypes };
-const TYPE_BACKGROUNDS: Record<string, string> = {
-  ...colors.pokemonTypeBackgrounds,
-};
 const ARTWORK_SIZE = 200;
 const FALLBACK_BG = colors.pokemonTypeBackgrounds.normal;
 
@@ -28,7 +29,7 @@ interface PokemonDetailHeaderProps {
 export function PokemonDetailHeader({ pokemon }: PokemonDetailHeaderProps) {
   const router = useRouter();
 
-  const primaryType = pokemon.types[0]?.type.name ?? "normal";
+  const primaryType = (pokemon.types[0]?.type.name ?? "normal") as PokemonType;
   const bgColor = TYPE_BACKGROUNDS[primaryType] ?? FALLBACK_BG;
 
   const spriteUri =
@@ -105,7 +106,10 @@ export function PokemonDetailHeader({ pokemon }: PokemonDetailHeaderProps) {
           <Chip
             key={t.type.name}
             label={capitalize(t.type.name)}
-            color={TYPE_COLORS[t.type.name] ?? colors.pokemonTypes.normal}
+            color={
+              TYPE_COLORS[t.type.name as PokemonType] ??
+              colors.pokemonTypes.normal
+            }
           />
         ))}
       </XStack>

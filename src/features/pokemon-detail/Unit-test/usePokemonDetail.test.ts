@@ -5,8 +5,8 @@
  * the store's fetchPokemonDetail action directly with a mock repo — the same
  * DI path the hook uses — then asserting on store state.
  *
- * Full lifecycle tests (mount/unmount effects) require @testing-library/react-native,
- * which is not yet installed (see .claude/testing.md for the recommended setup).
+ * Full lifecycle tests (mount/unmount effects) can be added using
+ * @testing-library/react-native (already installed as a dev dependency).
  */
 import { usePokemonDetailStore } from "../store/store";
 import type { PokemonDetailResponse } from "../../../shared/api/types";

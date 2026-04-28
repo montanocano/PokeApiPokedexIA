@@ -4,11 +4,13 @@ import { useSearchFilter } from "../../../../features/pokemon-list/search-filter
 
 export function SearchBar() {
   const [inputValue, setInputValue] = useState("");
-  const { handleQueryChange, setSearchQuery } = useSearchFilter();
+  const { handleQueryChange, setSearchQuery, cancelPending } =
+    useSearchFilter();
 
   const handleChangeText = (text: string) => {
     setInputValue(text);
     if (text === "") {
+      cancelPending();
       setSearchQuery("");
     } else {
       handleQueryChange(text);

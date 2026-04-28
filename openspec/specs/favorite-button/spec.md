@@ -1,7 +1,7 @@
 ## Requirements
 
 ### Requirement: FavoriteButton component
-The system SHALL provide `src/features/pokemon-favorite/components/FavoriteButton.tsx`, a pressable heart icon that toggles the favourite status of a given Pokémon ID.
+The system SHALL provide `src/shared/ui/components/FavoriteButton/index.tsx`, a pressable heart icon that toggles the favourite status of a given Pokémon ID.
 
 #### Scenario: Button shows filled heart for a favourited Pokémon
 - **WHEN** `FavoriteButton` is rendered with a Pokémon ID that is in the favorites list

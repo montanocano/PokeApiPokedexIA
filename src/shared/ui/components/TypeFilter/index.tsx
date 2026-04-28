@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { XStack } from "tamagui";
 import { Chip } from "../Chip";
 import { TYPE_COLORS } from "../../tokens/colors";
@@ -35,7 +35,7 @@ export function TypeFilter() {
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: spacing[3], gap: spacing[2] }}
+      contentContainerStyle={styles.scrollContent}
     >
       <XStack gap={spacing[2]}>
         {POKEMON_TYPES.map((type) => (
@@ -51,3 +51,9 @@ export function TypeFilter() {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollContent: {
+    paddingHorizontal: spacing[3],
+  },
+});
