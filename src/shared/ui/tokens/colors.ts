@@ -73,3 +73,7 @@ export const colors = {
 } as const;
 
 export type PokemonType = keyof typeof colors.pokemonTypes;
+
+export const TYPE_COLORS: Record<PokemonType, string> = colors.pokemonTypes;
+export const TYPE_BACKGROUNDS: Record<PokemonType, string> =
+  colors.pokemonTypeBackgrounds;
